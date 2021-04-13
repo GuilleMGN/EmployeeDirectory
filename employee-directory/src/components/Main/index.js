@@ -1,9 +1,12 @@
 import React from "react";
 import "./Main.css";
+import SearchBox from "../SearchBox";
+// import API from "../../utils/API";
 
-function Main () {
+function Main() {
     return (
-        <p>This is the Main</p>
+        <SearchBox />
     );
 }
+
 export default Main;
