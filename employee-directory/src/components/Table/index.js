@@ -2,13 +2,17 @@ import React from "react";
 import "./Table.css";
 
 
-function Table(props) {
+function Table(props, sortBy) {
     return (
-        <table className="table">
+        <table className="table table-striped table-hover table-condensed table-sortable">
             <thead>
                 <tr>
                     <th>Image</th>
-                    <th>Name {props.order === "ascend" ? "^" : "v" }</th>
+                    <th data-field="name" data-sortable="true">Name <span> </span>
+                        <button onClick={() => props.sortBy("name", "first", "last")}
+                          className="btn-outline-secondary"> ⇅
+                        </button>
+                    </th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Age</th>

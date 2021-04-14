@@ -10,17 +10,17 @@ class Main extends Component {
     state = {
         users: [],
         filteredUsers: [],
-        order: "ascend"
+        order: "asc"
     }
     componentDidMount() {
         API.getUsers()
-        .then(res => {
-            console.log(res);
-            this.setState({
-                users: res.data.results,
-                filteredUsers: res.data.results
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    users: res.data.results,
+                    filteredUsers: res.data.results
+                })
             })
-        })
     }
     handleSearchChange = (e) => {
         console.log(e.target.value);
@@ -34,12 +34,45 @@ class Main extends Component {
             filteredUsers: results
         })
     }
+    sortBy = (key, primary = 0, secondary = 0) => {
+        let sortedUsers = this.state.filteredUsers;
+        if (this.state.order[key]) {
+          this.setState({
+            filteredUsers: sortedUsers.reverse(),
+            order: {
+              ...this.order,
+              [key]: this.state.order[key] === "asc" ? "desc" : "asc",
+            },
+          });
+        } else {
+          sortedUsers = this.state.filteredUsers.sort((a, b) => {
+            a = a[key];
+            b = b[key];
+            if (primary) {
+              if (secondary && a[primary] === b[primary]) {
+                return a[secondary].localeCompare(b[secondary]);
+              }
+              return a[primary].localeCompare(b[primary]);
+            } else {
+              return a.localeCompare(b);
+            }
+          });
     
+          this.setState({
+            filteredUsers: sortedUsers,
+            order: {
+              ...this.order,
+              [key]: "asc",
+            },
+          });
+        }
+      };
+
     render() {
         return (
             <Wrapper>
-                <SearchBox handleSearchChange={this.handleSearchChange}/>
-                <Table users={this.state.filteredUsers} />
+                <SearchBox handleSearchChange={this.handleSearchChange} />
+                <Table users={this.state.filteredUsers} sortBy={this.sortBy}/>
             </Wrapper>
 
         )
