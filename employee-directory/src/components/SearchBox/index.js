@@ -1,10 +1,10 @@
 import React from "react";
 import "./SearchBox.css";
 
-function SearchBox({handleSearchChange}) {
+function SearchBox({handleSearchChange, handleSubmitForm}) {
     return (
         <div className="searchbox">
-            <form className="form-inline justify-content-center">
+            <form className="form-inline justify-content-center" onSubmit={ handleSubmitForm } >
                 <input
                     className="form-control"
                     type="search"
