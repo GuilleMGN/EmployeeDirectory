@@ -4,7 +4,7 @@ import "./SearchBox.css";
 function SearchBox({handleSearchChange}) {
     return (
         <div className="searchbox">
-            <form className="form-inline">
+            <form className="form-inline justify-content-center">
                 <input
                     className="form-control"
                     type="search"

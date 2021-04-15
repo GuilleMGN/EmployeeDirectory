@@ -1,4 +1,7 @@
-.jumbotron {
+.box {
     background-color: navy !important;
     color: white;
+    padding: 50px;
+    border-bottom: 5px solid red;
+    margin-bottom: 25px;
 }
